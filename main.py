@@ -59,11 +59,15 @@ def update_blog(blog_id: int, blog: BlogUpdate):
     updated_count = Blog.update(**update_data).where(Blog.id == blog_id).execute()
     if not updated_count:
         raise HTTPException(status_code=404, detail='Blog not found')
-    return None
+    return {
+            "status": "done"
+            }
 
 @app.delete('/blogs/{blog_id}')
 def delete_blog(blog_id: int):
     deleted_count = Blog.delete().where(Blog.id == blog_id).execute()
     if not deleted_count:
         raise HTTPException(status_code=404, detail='Blog not found')
-    return None
+    return {
+            "status": "done"
+            }
